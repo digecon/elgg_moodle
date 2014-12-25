@@ -5,6 +5,7 @@ class Moodle {
     private $apikey;
     private $salt;
     private $url;
+	private $debug = false;
 	
 	/**
 	 * Add this information to password to 
@@ -27,9 +28,14 @@ class Moodle {
         $this->url    = $moodle->getSetting('server_url');
         $this->salt   = $moodle->getSetting('security_salt');
         $this->apikey = $moodle->getSetting('apikey');
-		$this->curl = new Curl(array(
-			'debug' => true
-		));
+		
+		$config = array();
+		if($this->debug)
+		{
+			$config['debug'] = true;
+		}
+		
+		$this->curl = new Curl($config);
 		
 		if($this->salt == null || strlen($this->salt) == 0)
 		{
@@ -60,17 +66,23 @@ class Moodle {
 		}		
 		$url = "{$this->url}/webservice/rest/server.php?wstoken={$this->apikey}&wsfunction={$function}&moodlewsrestformat=json";
 		
-		echo "###############################################<br/>\n";
-		echo "moodle query started<br/>\n";
-		echo "url: $url\n<br/>\n";
-		echo "params: ". var_export($params, true)."\n<br/>\n";
-		
-		ob_get_level() && ob_flush(); flush();
+		if($this->debug)
+		{
+			echo "###############################################<br/>\n";
+			echo "moodle query started<br/>\n";
+			echo "url: $url\n<br/>\n";
+			echo "params: ". var_export($params, true)."\n<br/>\n";
+
+			ob_get_level() && ob_flush(); flush();
+		}
 		
 		$response =  json_decode($this->curl->$method($url, $params));		
 		
-		echo "response: ". var_export($response, true)."\n<br/>\n";
-		echo "###############################################<br/>\n";
+		if($this->debug)
+		{
+			echo "response: ". var_export($response, true)."\n<br/>\n";
+			echo "###############################################<br/>\n";
+		}
 		return $response;
 	}
 	
