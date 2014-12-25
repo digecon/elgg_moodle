@@ -4,6 +4,7 @@
 /**
  * Moodle login form
  */
+$moodle = $vars['moodle'];
 $login_url = $moodle->getUrl() . '/login/index.php';
 $userdata = $moodle->getUserData();
 ?>
