@@ -57,6 +57,8 @@ class Moodle {
 		echo "url: $url\n<br/>\n";
 		echo "params: ". var_export($params, true)."\n<br/>\n";
 		
+		ob_get_level() && ob_flush(); flush();
+		
 		$response =  json_decode($this->curl->$method($url, $params));		
 		
 		echo "response: ". var_export($response, true)."\n<br/>\n";
