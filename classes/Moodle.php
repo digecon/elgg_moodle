@@ -109,7 +109,7 @@ class Moodle {
     
     public function userCheck(){		
         $userdata = $this->getUserData();		
-		$response = $this->query(self::F_GET_USER_BY_FIELD, array("email" => $userdata->email));		
+		$response = $this->query(self::F_GET_USER_BY_FIELD, array("field" => "email", "values" => array($userdata->email)));		
 		return count($response) == 1;			
     }
 	
