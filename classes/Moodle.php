@@ -80,8 +80,8 @@ class Moodle {
     /**
 	 * create password for current user
 	 */
-    protected function passCreate(){
-        return md5($this->getUserData()->email . $this->salt);
+    protected function passCreate($email){
+        return md5($email . $this->salt);
     }    
     
     private function loadUserData(){
@@ -96,7 +96,7 @@ class Moodle {
 		$returnValue->firstname = (isset($name_arr[0]) && strlen($name_arr[0]) > 0) ? $name_arr[0] : "Anonymous";
 		$returnValue->lastname = isset($name_arr[1]) ? $name_arr[1] : "Anonymous";
 		$returnValue->email = $logged_user->email;
-		$returnValue->password = $this->passCreate();
+		$returnValue->password = $this->passCreate($logged_user->email);
 
         return $returnValue;
     }
