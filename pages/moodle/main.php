@@ -1,7 +1,5 @@
 <?php
 
-set_time_limit(120);
-
 // make sure only logged in users can see this page 
 gatekeeper();
 
