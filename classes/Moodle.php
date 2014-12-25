@@ -6,6 +6,12 @@ class Moodle {
     private $salt;
     private $url;
 	
+	/**
+	 * Add this information to password to 
+	 * @var string
+	 */
+	private $pass_addition = "a-_A1";
+	
 	private $userdata = null;
 	
 	const F_GET_USER_BY_FIELD = "core_user_get_users_by_field";
@@ -81,7 +87,7 @@ class Moodle {
 	 * create password for current user
 	 */
     protected function passCreate($email){
-        return md5($email . $this->salt);
+        return md5($email . $this->salt) . $this->pass_addition;
     }    
     
     private function loadUserData(){
