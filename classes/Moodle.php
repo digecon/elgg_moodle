@@ -21,7 +21,9 @@ class Moodle {
         $this->url    = $moodle->getSetting('server_url');
         $this->salt   = $moodle->getSetting('security_salt');
         $this->apikey = $moodle->getSetting('apikey');
-		$this->curl = new Curl();
+		$this->curl = new Curl(array(
+			'debug' => true
+		));
 		
 		if($this->salt == null || strlen($this->salt) == 0)
 		{
