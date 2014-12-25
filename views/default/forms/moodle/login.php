@@ -20,7 +20,7 @@ echo elgg_view('input/text', array(
 
 echo elgg_view('input/password', array(
 	'name' => 'password', 
-	'value' => $moodle->passCreate()
+	'value' => $userdata->password
 )); 
 
 echo elgg_view('input/submit', array(
