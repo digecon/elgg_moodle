@@ -2,7 +2,7 @@
 
 //page handler for main page of Moodle plugin
 function moodle_page_handler(){
-	include elgg_get_plugins_path() . 'moodel/pages/moodle/main.php';
+	include elgg_get_plugins_path() . 'moodle/pages/moodle/main.php';
 }
 
 function moodle_init()
