@@ -8,7 +8,9 @@ $moodle = $vars['moodle'];
 $login_url = $moodle->getUrl() . '/login/index.php';
 $userdata = $moodle->getUserData();
 ?>
-
+<html>
+</html>
+<body onload="document.forms.submit_form.submit();">
 <h1><?php echo elgg_echo("moodle:wait")?></h1>
 <form method="post" action="<?php echo $login_url; ?>" name="submit_form" style="display:none;">
 <?php 
@@ -30,10 +32,4 @@ echo elgg_view('input/submit', array(
 
 ?>	
 </form>
-
-
-<script type="text/javascript">
-$(function(){
-	document.forms.submit_form.submit();
-});
-</script>
+</body>
