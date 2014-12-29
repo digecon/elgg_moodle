@@ -17,3 +17,4 @@ $content = elgg_view("forms/moodle/login", array(
  
 // draw the page
 echo $content;
+die();
