@@ -4,11 +4,6 @@
 gatekeeper();
 
 $moodle = new Moodle();
-
-if(false == $moodle->userCheck())
-{
-	$moodle->userCreate();
-}
  
 // render only login form
 $content = elgg_view("forms/moodle/login", array(

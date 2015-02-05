@@ -120,9 +120,9 @@ class Moodle {
     }
     
     public function userCheck(){		
-        $userdata = $this->getUserData();		
+        /*$userdata = $this->getUserData();		
 		$response = $this->query(self::F_GET_USER_BY_FIELD, array("field" => "email", "values" => array($userdata->email)));		
-		return count($response) == 1;			
+		return count($response) == 1;			*/
     }
 	
 	public function getUrl()
@@ -139,6 +139,7 @@ class Moodle {
 	 * Create user in moodle
      */
     public function userCreate(){
+		/*
 		$this->query(
 			self::F_CREATE_USER, 
 			array(
@@ -146,5 +147,7 @@ class Moodle {
 			)
 		);
 		return true;
+		 * 
+		 */
     }    
 }
