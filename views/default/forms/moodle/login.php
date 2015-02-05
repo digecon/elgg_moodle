@@ -17,7 +17,12 @@ $userdata = $moodle->getUserData();
 
 echo elgg_view('input/text', array(
 	'name' => 'openid_url', 
-	'value' => elgg_normalize_url("profile/".$userdata['username'])
+	'value' => elgg_normalize_url("profile/".$userdata->username)
+));
+
+echo elgg_view('input/submit', array(
+	'id' => 'submit_button', 
+	'value' => elgg_echo('login')
 ));
 
 ?>	
