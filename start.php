@@ -8,27 +8,7 @@ function moodle_page_handler(){
 function moodle_profile_updated($event, $object_type, $user)
 {
 	elgg_load_library('moodle:main');	
-	moodle_update_profile_data($user);
-}
-
-function moodle_profile_icon_updated($event, $object_type, $user)
-{
-	elgg_load_library('moodle:main');	
-	moodle_update_profile_picture($user);
-}
-
-function moodle_profile_role_updated($event, $object_type, $user)
-{
-	elgg_load_library('moodle:main');	
-	moodle_update_role($user);
-}
-
-function moodle_profile_logined($event, $object_type, $user)
-{
-	elgg_load_library('moodle:main');	
-	moodle_update_profile_data($user);
-	moodle_update_profile_picture($user);
-	moodle_update_role($user);
+	moodle_update_profile($user);
 }
 
 
@@ -41,12 +21,25 @@ function moodle_init()
 	elgg_register_page_handler('moodle','moodle_page_handler');	
 	
 	elgg_register_library('moodle:main', elgg_get_plugins_path() . 'moodle/lib/moodle.php');	
+	
+	$ref = $_SERVER["HTTP_REFERER"];
+	$moodle = elgg_get_plugin_from_id('moodle');
+	$moodle_host = parse_url($moodle->getSetting('server_url'), PHP_URL_HOST);
+	if(strpos($ref, $moodle_host) !== false)
+	{
+		elgg_load_library('moodle:main');	
+		$user = get_loggedin_user();
+		if($user != null)
+		{
+			moodle_update_profile(get_loggedin_user());		
+		}
+	}
 }
 
 elgg_register_event_handler('init', 'system', 'moodle_init');
 elgg_register_event_handler('profileupdate', 'user', 'moodle_profile_updated');
-elgg_register_event_handler('profileiconupdate', 'user', 'moodle_profile_icon_updated');
-elgg_register_event_handler('kmsroleupdate', 'user', 'moodle_profile_role_updated');
-elgg_register_event_handler('login', 'user', 'moodle_profile_logined', 500);
+elgg_register_event_handler('profileiconupdate', 'user', 'moodle_profile_updated');
+elgg_register_event_handler('kmsroleupdate', 'user', 'moodle_profile_updated');
+//elgg_register_event_handler('login', 'user', 'moodle_profile_logined', 500);
 
 
