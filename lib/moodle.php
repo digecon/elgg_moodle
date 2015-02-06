@@ -62,5 +62,42 @@ function moodle_update_profile_data(ElggUser $user)
 
 function moodle_update_role(ElggUser $user)
 {
+	$moodle = new Moodle();
+	$moodleUser = $moodle->findUser($user->email);	
 	
+	if($moodleUser != null)
+	{
+		$role = kms_get_user_role($user);
+		$config = include(dirname(__DIR__)."/config.php");
+		
+		$assign = array();
+		$unassign = array();
+		
+		foreach($config as $role_name => $role_id)
+		{
+			if($role_name == $role)
+			{
+				$assign[] = array(
+					'roleid' => $role_id,
+					'userid' => $moodleUser->id
+				);
+			}
+			else
+			{
+				$unassign = array(
+					'roleid' => $role_id,
+					'userid' => $moodleUser->id					
+				);
+			}
+		}
+		//core_role_unassign_roles 
+		
+		$moodle->query("core_role_unassign_roles", array(
+			'unassignments' => $unassign
+		));
+		
+		$moodle->query("core_role_assign_roles", array(
+			'assignments' => $assign
+		));		
+	}	
 }
