@@ -47,6 +47,6 @@ elgg_register_event_handler('init', 'system', 'moodle_init');
 elgg_register_event_handler('profileupdate', 'user', 'moodle_profile_updated');
 elgg_register_event_handler('profileiconupdate', 'user', 'moodle_profile_icon_updated');
 elgg_register_event_handler('kmsroleupdate', 'user', 'moodle_profile_role_updated');
-elgg_register_event_handler('login:after', 'user', 'moodle_profile_logined');
+elgg_register_event_handler('login', 'user', 'moodle_profile_logined', 500);
 
 
