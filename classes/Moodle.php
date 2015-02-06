@@ -58,7 +58,7 @@ class Moodle {
 		return $string;
     }
 	
-	protected function query($function, array $params = array(), $method = "post")
+	public function query($function, array $params = array(), $method = "post")
 	{
 		if(false == in_array($method, array("get","put","post","delete")))
 		{
@@ -124,6 +124,16 @@ class Moodle {
 		$response = $this->query(self::F_GET_USER_BY_FIELD, array("field" => "email", "values" => array($userdata->email)));		
 		return count($response) == 1;			*/
     }
+	
+	public function findUser($email)
+	{
+		$response = $this->query(self::F_GET_USER_BY_FIELD, array("field" => "email", "values" => array($email)));		
+		if(count($response) > 0)
+		{
+			return $response[0];
+		}
+		else null;			
+	}
 	
 	public function getUrl()
 	{
