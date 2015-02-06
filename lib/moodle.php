@@ -79,14 +79,16 @@ function moodle_update_role(ElggUser $user)
 			{
 				$assign[] = array(
 					'roleid' => $role_id,
-					'userid' => $moodleUser->id
+					'userid' => $moodleUser->id,
+					'contextid' => 1
 				);
 			}
 			else
 			{
 				$unassign[] = array(
 					'roleid' => $role_id,
-					'userid' => $moodleUser->id					
+					'userid' => $moodleUser->id,
+					'contextid' => 1
 				);
 			}
 		}
