@@ -7,16 +7,19 @@ function moodle_page_handler(){
 
 function moodle_profile_updated($event, $object_type, $user)
 {
+	elgg_load_library('moodle:main');	
 	moodle_update_profile_data($user);
 }
 
 function moodle_profile_icon_updated($event, $object_type, $user)
 {
+	elgg_load_library('moodle:main');	
 	moodle_update_profile_picture($user);
 }
 
 function moodle_profile_role_updated($event, $object_type, $user)
 {
+	elgg_load_library('moodle:main');	
 	moodle_update_role($user);
 }
 
@@ -27,6 +30,8 @@ function moodle_init()
 	
 	// Register a page handler, so we can have nice URLs
 	elgg_register_page_handler('moodle','moodle_page_handler');	
+	
+	elgg_register_library('moodle:main', elgg_get_plugins_path() . 'moodle/lib/moodle.php');	
 }
 
 elgg_register_event_handler('init', 'system', 'moodle_init');
