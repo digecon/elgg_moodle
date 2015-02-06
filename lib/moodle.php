@@ -84,7 +84,7 @@ function moodle_update_role(ElggUser $user)
 			}
 			else
 			{
-				$unassign = array(
+				$unassign[] = array(
 					'roleid' => $role_id,
 					'userid' => $moodleUser->id					
 				);
