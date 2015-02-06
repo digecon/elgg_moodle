@@ -49,7 +49,7 @@ function moodle_update_profile_data(ElggUser $user)
 					array(
 						'id' => $moodleUser->id,
 						'city' => $user->location,
-						'description' => strip_tags($user->description),
+						'description' => $user->description,
 						'url' => elgg_normalize_url("profile/".$user->username),
 						'phone1' => $user->phone,
 						'phone2' => $user->mobile
